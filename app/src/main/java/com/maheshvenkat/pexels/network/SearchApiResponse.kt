@@ -1,6 +1,7 @@
 package com.maheshvenkat.pexels.network
 
 import com.google.gson.annotations.SerializedName
+import com.maheshvenkat.pexels.models.Photo
 
 /**
  * API Data class to hold pexel image responses from search Image API call.
@@ -39,5 +40,16 @@ data class PhotoInfo(
     @field:SerializedName("landscape") val landscape: String,
     @field:SerializedName("tiny") val tiny: String
 )
+
+
+fun List<PexelPhoto>.asDomainModel(): List<Photo> {
+    return map {
+        Photo(
+            id = it.id,
+            originalUrl = it.photoInfo.original,
+            smallUrl = it.photoInfo.small,
+            portraitUrl = it.photoInfo.portrait)
+    }
+}
 
 
