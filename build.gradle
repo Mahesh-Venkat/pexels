@@ -32,6 +32,7 @@ buildscript {
         def moshi_version = "1.9.3"
         def core_version = "1.3.1"
         def paging_version = '3.1.0'
+        def okhttp_logging_interceptor_version = '4.9.0'
 
         libraries = [
                 // Kotlin standard library
@@ -72,13 +73,14 @@ buildscript {
 
                 //Paging
                 "androidx.paging:paging-runtime-ktx:$paging_version",
+                "androidx.room:room-paging:$paging_version",
 
                 // network & serialization
                 "com.google.code.gson:gson:$gson_version",
                 "com.squareup.retrofit2:converter-moshi:$retrofit_gson_version",
                 "com.squareup.retrofit2:retrofit:$retrofit_version",
-                "com.jakewharton.timber:timber:$timber_version"
-        ]
+                "com.jakewharton.timber:timber:$timber_version",
+                "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version"        ]
 
         librariesKapt = [
                 "androidx.room:room-compiler:$room_version",
