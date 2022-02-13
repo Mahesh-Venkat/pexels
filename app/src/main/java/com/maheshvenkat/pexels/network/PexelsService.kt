@@ -22,7 +22,7 @@ interface PexelsService {
      * Get Photos from searched text
      */
     @GET("search/")
-    suspend fun searchRepos(
+    suspend fun searchPhotos(
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("per_page") itemsPerPage: Int

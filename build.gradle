@@ -73,7 +73,7 @@ buildscript {
 
                 //Paging
                 "androidx.paging:paging-runtime-ktx:$paging_version",
-                "androidx.room:room-paging:$paging_version",
+                "androidx.room:room-paging:$room_version",
 
                 // network & serialization
                 "com.google.code.gson:gson:$gson_version",
