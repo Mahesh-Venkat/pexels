@@ -1,6 +1,5 @@
 package com.maheshvenkat.pexels.data
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -9,7 +8,7 @@ import com.maheshvenkat.pexels.network.PexelsService
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
-class PexelRepository(private val service: PexelsService) {
+class PhotoRepository(private val service: PexelsService) {
 
     /**
      * Search Photos whose names match the query, exposed as a stream of data that will emit
