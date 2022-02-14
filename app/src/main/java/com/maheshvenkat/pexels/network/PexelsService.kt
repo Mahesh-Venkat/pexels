@@ -1,11 +1,11 @@
 package com.maheshvenkat.pexels.network
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+
+import com.maheshvenkat.pexels.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,8 +14,6 @@ import retrofit2.http.Query
  */
 
 private const val BASE_URL = "https://api.pexels.com/v1/"
-
-private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
 interface PexelsService {
     /**
@@ -34,13 +32,17 @@ interface PexelsService {
             val logger = HttpLoggingInterceptor()
             logger.level = HttpLoggingInterceptor.Level.BASIC
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
+            val client = OkHttpClient.Builder().addInterceptor { chain ->
+                val request =
+                    chain.request().newBuilder().addHeader("Authorization", BuildConfig.API_KEY)
+                        .build()
+                chain.proceed(request)
+            }.addInterceptor(logger).build()
+
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PexelsService::class.java)
         }

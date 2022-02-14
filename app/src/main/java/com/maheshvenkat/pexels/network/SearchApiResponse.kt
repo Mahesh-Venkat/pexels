@@ -21,7 +21,7 @@ data class PexelPhoto(
     @field:SerializedName("id") val id: Long,
     @field:SerializedName("url") val url: String,
     @field:SerializedName("photographer") val photographer: String,
-    @field:SerializedName("photographer_url") val photographerUrl: String?,
+    @field:SerializedName("photographer_url") val photographerUrl: String,
     @field:SerializedName("photographer_id") val photographerId: Long,
     @field:SerializedName("avg_color") val color: String,
     @field:SerializedName("src") val photoInfo: PhotoInfo
@@ -47,8 +47,9 @@ fun List<PexelPhoto>.asDomainModel(): List<Photo> {
         Photo(
             id = it.id,
             originalUrl = it.photoInfo.original,
-            smallUrl = it.photoInfo.small,
-            portraitUrl = it.photoInfo.portrait)
+            smallUrl = it.photoInfo.tiny,
+            portraitUrl = it.photoInfo.portrait
+        )
     }
 }
 
