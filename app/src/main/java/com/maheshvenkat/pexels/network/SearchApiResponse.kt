@@ -1,6 +1,7 @@
 package com.maheshvenkat.pexels.network
 
 import com.google.gson.annotations.SerializedName
+import com.maheshvenkat.pexels.db.DBPhoto
 import com.maheshvenkat.pexels.models.Photo
 
 /**
@@ -47,8 +48,21 @@ fun List<PexelPhoto>.asDomainModel(): List<Photo> {
         Photo(
             id = it.id,
             originalUrl = it.photoInfo.original,
-            smallUrl = it.photoInfo.tiny,
+            smallUrl = it.photoInfo.small,
             portraitUrl = it.photoInfo.portrait
+        )
+    }
+}
+
+fun List<PexelPhoto>.asDatabaseModel(): List<DBPhoto> {
+    return map {
+        DBPhoto(
+            id = it.id,
+            originalUrl = it.photoInfo.original,
+            smallUrl = it.photoInfo.small,
+            portraitUrl = it.photoInfo.portrait,
+            photographer = it.photographer,
+            photographerUrl = it.photographerUrl
         )
     }
 }
