@@ -2,7 +2,7 @@ package com.maheshvenkat.pexels.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.maheshvenkat.pexels.data.PhotoRepository.Companion.NETWORK_PAGE_SIZE
+import com.maheshvenkat.pexels.data.PhotosRepository.Companion.NETWORK_PAGE_SIZE
 import com.maheshvenkat.pexels.models.Photo
 import com.maheshvenkat.pexels.network.PexelsService
 import com.maheshvenkat.pexels.network.asDomainModel
@@ -11,7 +11,7 @@ import java.io.IOException
 
 private const val PHOTOS_STARTING_PAGE_INDEX = 1
 
-class PexelPagingsource(
+class PhotosPagingSource(
     private val service: PexelsService,
     private val query: String
 ) : PagingSource<Int, Photo>() {

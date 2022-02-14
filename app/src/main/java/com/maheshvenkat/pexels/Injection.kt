@@ -18,7 +18,7 @@ package com.maheshvenkat.pexels
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.savedstate.SavedStateRegistryOwner
-import com.maheshvenkat.pexels.data.PhotoRepository
+import com.maheshvenkat.pexels.data.PhotosRepository
 import com.maheshvenkat.pexels.network.PexelsService
 import com.maheshvenkat.pexels.ui.photos.ViewModelFactory
 
@@ -32,13 +32,13 @@ object Injection {
     /**
      * Creates an instance of PhotoRepository based on the PexelsService
      */
-    private fun providePhotoRepository(): PhotoRepository {
-        return PhotoRepository(PexelsService.create())
+    private fun providePhotoRepository(): PhotosRepository {
+        return PhotosRepository(PexelsService.create())
     }
 
     /**
      * Provides the [ViewModelProvider.Factory] that is then used to get a reference to
-     * [ViewModel] objects.
+     * ViewModel objects.
      */
     fun provideViewModelFactory(owner: SavedStateRegistryOwner): ViewModelProvider.Factory {
         return ViewModelFactory(owner, providePhotoRepository())

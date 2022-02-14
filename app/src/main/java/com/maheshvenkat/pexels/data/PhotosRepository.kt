@@ -8,7 +8,7 @@ import com.maheshvenkat.pexels.network.PexelsService
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
-class PhotoRepository(private val service: PexelsService) {
+class PhotosRepository(private val service: PexelsService) {
 
     /**
      * Search Photos whose names match the query, exposed as a stream of data that will emit
@@ -19,7 +19,7 @@ class PhotoRepository(private val service: PexelsService) {
 
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-            pagingSourceFactory = { PexelPagingsource(service, query) }
+            pagingSourceFactory = { PhotosPagingSource(service, query) }
         ).flow
     }
 

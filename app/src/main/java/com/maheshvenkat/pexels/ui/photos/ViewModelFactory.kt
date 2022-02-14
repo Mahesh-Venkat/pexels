@@ -4,14 +4,14 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.maheshvenkat.pexels.data.PhotoRepository
+import com.maheshvenkat.pexels.data.PhotosRepository
 
 /**
  * Factory for ViewModels
  */
 class ViewModelFactory(
     owner: SavedStateRegistryOwner,
-    private val repository: PhotoRepository
+    private val repository: PhotosRepository
 ) : AbstractSavedStateViewModelFactory(owner, null) {
 
     override fun <T : ViewModel?> create(
