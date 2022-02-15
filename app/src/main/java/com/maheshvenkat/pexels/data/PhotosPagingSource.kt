@@ -9,7 +9,6 @@ import com.maheshvenkat.pexels.network.asDomainModel
 import retrofit2.HttpException
 import java.io.IOException
 
-private const val PHOTOS_STARTING_PAGE_INDEX = 1
 
 class PhotosPagingSource(
     private val service: PexelsService,

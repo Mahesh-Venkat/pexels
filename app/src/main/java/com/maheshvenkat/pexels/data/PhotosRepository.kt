@@ -8,6 +8,8 @@ import com.maheshvenkat.pexels.network.PexelsService
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
+const val PHOTOS_STARTING_PAGE_INDEX = 1
+
 class PhotosRepository(private val service: PexelsService) {
 
     /**
