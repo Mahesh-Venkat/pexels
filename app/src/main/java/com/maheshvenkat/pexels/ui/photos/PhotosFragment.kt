@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maheshvenkat.pexels.Injection
 import com.maheshvenkat.pexels.databinding.FragmentPhotosBinding
 import com.maheshvenkat.pexels.models.Photo
-import com.maheshvenkat.pexels.ui.photos.adapter.PhotosAdapter
+import com.maheshvenkat.pexels.ui.photos.adapter.loadstate.PhotosLoadStateAdapter
+import com.maheshvenkat.pexels.ui.photos.adapter.photos.PhotosAdapter
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -58,6 +59,10 @@ class PhotosFragment : Fragment() {
     ) {
         val photosAdapter = PhotosAdapter()
         list.adapter = photosAdapter
+        list.adapter = photosAdapter.withLoadStateHeaderAndFooter(
+            header = PhotosLoadStateAdapter { photosAdapter.retry() },
+            footer = PhotosLoadStateAdapter { photosAdapter.retry() }
+        )
 
         bindSearch(
             uiState = uiState,

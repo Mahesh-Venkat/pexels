@@ -1,4 +1,4 @@
-package com.maheshvenkat.pexels.ui.photos.adapter
+package com.maheshvenkat.pexels.ui.photos.adapter.photos
 
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +48,7 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     companion object {
         fun create(parent: ViewGroup): PhotoViewHolder {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.grid_view_item, parent, false)
+                .inflate(R.layout.photos_grid_view_item, parent, false)
             return PhotoViewHolder(view)
         }
     }

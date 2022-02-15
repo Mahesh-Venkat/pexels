@@ -1,4 +1,4 @@
-package com.maheshvenkat.pexels.ui.photos.adapter
+package com.maheshvenkat.pexels.ui.photos.adapter.photos
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
