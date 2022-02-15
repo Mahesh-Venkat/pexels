@@ -54,7 +54,7 @@ fun List<PexelPhoto>.asDomainModel(): List<Photo> {
     }
 }
 
-fun List<PexelPhoto>.asDatabaseModel(): List<DBPhoto> {
+fun List<PexelPhoto>.asDatabaseModel(queryString: String): List<DBPhoto> {
     return map {
         DBPhoto(
             id = it.id,
@@ -62,7 +62,8 @@ fun List<PexelPhoto>.asDatabaseModel(): List<DBPhoto> {
             smallUrl = it.photoInfo.small,
             portraitUrl = it.photoInfo.portrait,
             photographer = it.photographer,
-            photographerUrl = it.photographerUrl
+            photographerUrl = it.photographerUrl,
+            searchedString = queryString
         )
     }
 }
