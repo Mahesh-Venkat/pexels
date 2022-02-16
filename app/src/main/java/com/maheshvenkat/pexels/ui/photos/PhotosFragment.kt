@@ -179,8 +179,14 @@ class PhotosFragment : Fragment() {
                 list.isVisible = !isListEmpty
                 // Show loading spinner during initial load or refresh.
                 progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+
                 // Show the retry state if initial load or refresh fails.
                 retryButton.isVisible = loadState.source.refresh is LoadState.Error
+                //Repurposing empty List text to show the error message
+                if (loadState.source.refresh is LoadState.Error) {
+                    emptyList.isVisible = loadState.source.refresh is LoadState.Error
+                    emptyList.text = getString(R.string.shared_label_oops_with_error_message)
+                }
 
                 // Toast on any error
                 val errorState = loadState.source.append as? LoadState.Error
@@ -193,11 +199,7 @@ class PhotosFragment : Fragment() {
                         getString(R.string.shared_label_oops_with_error_message) + it.error,
                         Toast.LENGTH_LONG
                     ).show()
-                } ?: Toast.makeText(
-                    requireContext(),
-                    getString(R.string.shared_label_oops_with_error_message),
-                    Toast.LENGTH_LONG
-                ).show()
+                }
             }
         }
     }

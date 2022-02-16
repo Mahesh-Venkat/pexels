@@ -19,8 +19,10 @@
         <item name="android:selectAllOnFocus">true</item>
     </style>
 
-    <style name="EmptyListText" parent="@style/TextAppearance.AppCompat.Display1">
+    <style name="EmptyListText" parent="@style/TextAppearance.AppCompat.Large">
         <item name="android:gravity">center</item>
+        <item name="android:layout_margin">@dimen/grid_2x</item>
+
     </style>
 
     <style name="PhotoItem">
