@@ -4,6 +4,7 @@
     <string name="try_again">Try again</string>
     <string name="search_hint">Photo Name</string>
     <string name="shared_label_oops_with_error_message">Oops, Something went wrong</string>
+    <string name="shared_label_no_internet_connection">You seem to be offline, please check data connection</string>
 
     <string name="title_photographer_info"> Photographer Info</string>
     <string name="shared_label_name"> Name</string>

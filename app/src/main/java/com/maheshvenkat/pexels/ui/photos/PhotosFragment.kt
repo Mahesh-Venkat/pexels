@@ -76,8 +76,6 @@ class PhotosFragment : Fragment() {
         uiActions: (UiAction) -> Unit,
         photosAdapter: PhotosAdapter
     ) {
-
-        list.adapter = photosAdapter
         list.adapter = photosAdapter.withLoadStateHeaderAndFooter(
             header = PhotosLoadStateAdapter { photosAdapter.retry() },
             footer = PhotosLoadStateAdapter { photosAdapter.retry() }
@@ -178,6 +176,7 @@ class PhotosFragment : Fragment() {
                     loadState.refresh is LoadState.NotLoading && photosAdapter.itemCount == 0
                 // show empty list
                 emptyList.isVisible = isListEmpty
+                emptyList.text = getString(R.string.no_results)
                 // Only show the list if refresh succeeds.
                 list.isVisible = !isListEmpty
             }

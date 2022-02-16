@@ -1,9 +1,12 @@
 package com.maheshvenkat.pexels.ui.photos.adapter.photos
 
+import android.net.ConnectivityManager
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -27,14 +30,29 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     private fun showImageData(photo: Photo) {
+        val imgUri =
+            getUriBaseOnNetworkConnectivity(photo)
+
         this.photo = photo
-        val imgUri = photo.originalUrl.toUri().buildUpon().scheme("https").build()
 
         Glide.with(imageView.context)
             .load(imgUri)
             .placeholder(R.drawable.loading_animation)
             .error(R.drawable.ic_broken_image)
             .into(imageView)
+    }
+
+    private fun getUriBaseOnNetworkConnectivity(photo: Photo): Uri {
+        val connectivityManager =
+            getSystemService(imageView.context, ConnectivityManager::class.java)
+        val imgUri =
+            if (connectivityManager?.isActiveNetworkMetered == true) {
+                photo.smallUrl.toUri().buildUpon().scheme("https").build()
+            } else {
+                photo.originalUrl.toUri().buildUpon().scheme("https").build()
+            }
+
+        return imgUri
     }
 
     companion object {
