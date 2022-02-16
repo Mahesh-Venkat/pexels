@@ -49,7 +49,9 @@ fun List<PexelPhoto>.asDomainModel(): List<Photo> {
             id = it.id,
             originalUrl = it.photoInfo.original,
             smallUrl = it.photoInfo.small,
-            portraitUrl = it.photoInfo.portrait
+            portraitUrl = it.photoInfo.portrait,
+            photographerName = it.photographer,
+            photographerUrl = it.photographerUrl
         )
     }
 }

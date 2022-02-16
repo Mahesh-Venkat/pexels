@@ -9,8 +9,10 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
@@ -42,11 +44,24 @@ class PhotosFragment : Fragment() {
         ).get(PhotosViewModel::class.java)
 
         // bind the state
+        val photosAdapter = PhotosAdapter(PhotosAdapter.OnClickListener {
+            viewModel.displayPhotographerDetails(it)
+        })
         binding.bindState(
             uiState = viewModel.state,
             pagingData = viewModel.pagingDataFlow,
-            uiActions = viewModel.accept
+            uiActions = viewModel.accept,
+            photosAdapter = photosAdapter
         )
+
+        // Navigate to Bottom sheet on click of the Photo from the adapter
+        viewModel.navigateToSelectedPhotographer.observe(viewLifecycleOwner, Observer {
+            if (null != it) {
+                this.findNavController()
+                    .navigate(PhotosFragmentDirections.actionPhotosFragmentToBottomSheet(it))
+                viewModel.displayPhotographerDetailsComplete()
+            }
+        })
 
         return binding.root
     }
@@ -58,9 +73,10 @@ class PhotosFragment : Fragment() {
     private fun FragmentPhotosBinding.bindState(
         uiState: StateFlow<UiState>,
         pagingData: Flow<PagingData<Photo>>,
-        uiActions: (UiAction) -> Unit
+        uiActions: (UiAction) -> Unit,
+        photosAdapter: PhotosAdapter
     ) {
-        val photosAdapter = PhotosAdapter()
+
         list.adapter = photosAdapter
         list.adapter = photosAdapter.withLoadStateHeaderAndFooter(
             header = PhotosLoadStateAdapter { photosAdapter.retry() },

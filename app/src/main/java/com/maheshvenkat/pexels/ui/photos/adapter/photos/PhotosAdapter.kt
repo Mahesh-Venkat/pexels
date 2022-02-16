@@ -4,11 +4,14 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.maheshvenkat.pexels.models.Photo
+import com.maheshvenkat.pexels.models.getPhotographerInfo
+import com.maheshvenkat.pexels.ui.photographer.PhotographerInfo
 
 /**
  * Adapter for the list of Photos
  */
-class PhotosAdapter : PagingDataAdapter<Photo, PhotoViewHolder>(Photo_COMPARATOR) {
+class PhotosAdapter(val onClickListener: OnClickListener) :
+    PagingDataAdapter<Photo, PhotoViewHolder>(Photo_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         return PhotoViewHolder.create(parent)
@@ -18,6 +21,10 @@ class PhotosAdapter : PagingDataAdapter<Photo, PhotoViewHolder>(Photo_COMPARATOR
         val photoItem = getItem(position)
         if (photoItem != null) {
             holder.bind(photoItem)
+
+            holder.itemView.setOnClickListener {
+                onClickListener.onClick(photoItem.getPhotographerInfo())
+            }
         }
     }
 
@@ -29,5 +36,9 @@ class PhotosAdapter : PagingDataAdapter<Photo, PhotoViewHolder>(Photo_COMPARATOR
             override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean =
                 oldItem == newItem
         }
+    }
+
+    class OnClickListener(val clickListener: (photographerInfo: PhotographerInfo) -> Unit) {
+        fun onClick(photographerInfo: PhotographerInfo) = clickListener(photographerInfo)
     }
 }

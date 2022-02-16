@@ -18,14 +18,6 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val imageView: ImageView = view.findViewById(R.id.photoImage)
     private var photo: Photo? = null
 
-    init {
-        view.setOnClickListener {
-            photo?.originalUrl?.let { url ->
-                // Load it in Glide
-            }
-        }
-    }
-
     fun bind(photo: Photo?) {
         if (photo == null) {
             imageView.visibility = View.GONE
@@ -36,7 +28,7 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private fun showImageData(photo: Photo) {
         this.photo = photo
-        val imgUri = photo.smallUrl.toUri().buildUpon().scheme("https").build()
+        val imgUri = photo.originalUrl.toUri().buildUpon().scheme("https").build()
 
         Glide.with(imageView.context)
             .load(imgUri)

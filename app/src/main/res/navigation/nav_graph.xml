@@ -9,5 +9,18 @@
         android:id="@+id/photosFragment"
         android:name="com.maheshvenkat.pexels.ui.photos.PhotosFragment"
         android:label="PhotosFragment"
-        tools:layout="@layout/fragment_photos" />
+        tools:layout="@layout/fragment_photos">
+        <action
+            android:id="@+id/action_photosFragment_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.maheshvenkat.pexels.ui.photographer.PhotographerInfoFragment"
+        tools:layout="@layout/fragment_photographer_info">
+        <argument
+            android:name="selectedPhotographer"
+            app:argType="com.maheshvenkat.pexels.ui.photographer.PhotographerInfo" />
+    </dialog>
 </navigation>

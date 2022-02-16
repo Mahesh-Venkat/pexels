@@ -1,12 +1,11 @@
 package com.maheshvenkat.pexels.ui.photos
 
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.maheshvenkat.pexels.data.PhotosRepository
 import com.maheshvenkat.pexels.models.Photo
+import com.maheshvenkat.pexels.ui.photographer.PhotographerInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -32,6 +31,13 @@ class PhotosViewModel(
      * Processor of side effects from the UI which in turn feedback into [state]
      */
     val accept: (UiAction) -> Unit
+
+    /**
+     * Helps us to set the Photographer info to the bottom sheet from Fragment
+     */
+    private val _navigateToSelectedPhotographer = MutableLiveData<PhotographerInfo>()
+    val navigateToSelectedPhotographer: LiveData<PhotographerInfo>
+        get() = _navigateToSelectedPhotographer
 
     init {
         val lastQueryScrolled: String = savedStateHandle.get(LAST_QUERY_SCROLLED) ?: DEFAULT_QUERY
@@ -87,6 +93,14 @@ class PhotosViewModel(
 
     private fun searchPhoto(queryString: String): Flow<PagingData<Photo>> =
         repository.getSearchResultStream(queryString)
+
+    fun displayPhotographerDetails(photographerInfo: PhotographerInfo) {
+        _navigateToSelectedPhotographer.value = photographerInfo
+    }
+
+    fun displayPhotographerDetailsComplete() {
+        _navigateToSelectedPhotographer.value = null
+    }
 }
 
 sealed class UiAction {

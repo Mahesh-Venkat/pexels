@@ -26,6 +26,8 @@ fun List<DBPhoto>.asDomainModel(): List<Photo> {
             originalUrl = it.originalUrl,
             smallUrl = it.smallUrl,
             portraitUrl = it.portraitUrl,
+            photographerName = it.photographer,
+            photographerUrl = it.photographerUrl
         )
     }
 }
@@ -37,5 +39,7 @@ fun DBPhoto.asDomainModel(): Photo {
         originalUrl = this.originalUrl,
         smallUrl = this.smallUrl,
         portraitUrl = this.portraitUrl,
+        photographerName = this.photographer,
+        photographerUrl = this.photographerUrl
     )
 }
