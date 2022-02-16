@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +15,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import com.maheshvenkat.pexels.Injection
+import com.maheshvenkat.pexels.R
 import com.maheshvenkat.pexels.databinding.FragmentPhotosBinding
 import com.maheshvenkat.pexels.models.Photo
 import com.maheshvenkat.pexels.ui.photos.adapter.loadstate.PhotosLoadStateAdapter
@@ -152,6 +155,51 @@ class PhotosFragment : Fragment() {
                 if (shouldScroll) list.scrollToPosition(0)
             }
         }
-    }
 
+        lifecycleScope.launch {
+            photosAdapter.loadStateFlow.collect { loadState ->
+                val isListEmpty =
+                    loadState.refresh is LoadState.NotLoading && photosAdapter.itemCount == 0
+                // show empty list
+                emptyList.isVisible = isListEmpty
+                // Only show the list if refresh succeeds.
+                list.isVisible = !isListEmpty
+            }
+        }
+
+        retryButton.setOnClickListener { photosAdapter.retry() }
+
+        lifecycleScope.launch {
+            photosAdapter.loadStateFlow.collect { loadState ->
+                val isListEmpty =
+                    loadState.refresh is LoadState.NotLoading && photosAdapter.itemCount == 0
+                // show empty list
+                emptyList.isVisible = isListEmpty
+                // Only show the list if refresh succeeds.
+                list.isVisible = !isListEmpty
+                // Show loading spinner during initial load or refresh.
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                // Show the retry state if initial load or refresh fails.
+                retryButton.isVisible = loadState.source.refresh is LoadState.Error
+
+                // Toast on any error
+                val errorState = loadState.source.append as? LoadState.Error
+                    ?: loadState.source.prepend as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                    ?: loadState.prepend as? LoadState.Error
+                errorState?.let {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.shared_label_oops_with_error_message) + it.error,
+                        Toast.LENGTH_LONG
+                    ).show()
+                } ?: Toast.makeText(
+                    requireContext(),
+                    getString(R.string.shared_label_oops_with_error_message),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
 }
+
