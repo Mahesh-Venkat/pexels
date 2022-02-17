@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Pexels</string>
+    <string name="page_title_search_photos">Search</string>
+    <string name="page_title_photo_info">Photo</string>
     <string name="no_results">Sorry, There are no results found with entered text</string>
     <string name="try_again">Try again</string>
     <string name="search_hint">Photo Name</string>

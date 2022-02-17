@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.maheshvenkat.pexels.ui.photographer.PhotoInfoViewModel" />
+            type="com.maheshvenkat.pexels.ui.photoinfo.PhotoInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +22,7 @@
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:imageUrl="@{viewModel.selectedPhoto.originalUrl}"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
 

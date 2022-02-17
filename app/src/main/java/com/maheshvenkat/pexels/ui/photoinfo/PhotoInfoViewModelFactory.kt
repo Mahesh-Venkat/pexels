@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.maheshvenkat.pexels.ui.photographer
+package com.maheshvenkat.pexels.ui.photoinfo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

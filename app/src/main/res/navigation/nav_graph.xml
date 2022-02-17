@@ -8,19 +8,20 @@
     <fragment
         android:id="@+id/photosFragment"
         android:name="com.maheshvenkat.pexels.ui.photos.PhotosFragment"
-        android:label="PhotosFragment"
+        android:label="Search"
         tools:layout="@layout/fragment_photos">
         <action
             android:id="@+id/action_photosFragment_to_photoInfo"
             app:destination="@id/photoInfo" />
     </fragment>
 
-    <dialog
+    <fragment
         android:id="@+id/photoInfo"
-        android:name="com.maheshvenkat.pexels.ui.photographer.PhotoInfoFragment"
+        android:name="com.maheshvenkat.pexels.ui.photoinfo.PhotoInfoFragment"
+        android:label="Photo"
         tools:layout="@layout/fragment_photo_info">
         <argument
             android:name="selectedPhoto"
             app:argType="com.maheshvenkat.pexels.models.Photo" />
-    </dialog>
+    </fragment>
 </navigation>

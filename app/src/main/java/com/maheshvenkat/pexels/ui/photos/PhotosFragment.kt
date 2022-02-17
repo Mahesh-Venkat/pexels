@@ -16,6 +16,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import com.maheshvenkat.pexels.Injection
+import com.maheshvenkat.pexels.MainActivity
 import com.maheshvenkat.pexels.R
 import com.maheshvenkat.pexels.databinding.FragmentPhotosBinding
 import com.maheshvenkat.pexels.models.Photo
@@ -36,6 +37,7 @@ class PhotosFragment : Fragment() {
     ): View {
         super.onCreate(savedInstanceState)
         val binding = FragmentPhotosBinding.inflate(layoutInflater)
+        (requireActivity() as MainActivity).title = getString(R.string.page_title_search_photos)
 
         // get the view model
         val viewModel = ViewModelProvider(
