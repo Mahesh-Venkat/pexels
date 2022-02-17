@@ -3,7 +3,9 @@ package com.maheshvenkat.pexels.ui.photos
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.map
 import com.maheshvenkat.pexels.data.PhotosRepository
+import com.maheshvenkat.pexels.db.asDomainModel
 import com.maheshvenkat.pexels.models.Photo
 import com.maheshvenkat.pexels.ui.photographer.PhotographerInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -93,6 +95,7 @@ class PhotosViewModel(
 
     private fun searchPhoto(queryString: String): Flow<PagingData<Photo>> =
         repository.getSearchResultStream(queryString)
+            .map { pagingData -> pagingData.map { dbPhoto -> dbPhoto.asDomainModel() } }
 
     fun displayPhotographerDetails(photographerInfo: PhotographerInfo) {
         _navigateToSelectedPhotographer.value = photographerInfo

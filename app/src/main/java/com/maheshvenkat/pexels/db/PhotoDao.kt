@@ -12,8 +12,8 @@ interface PhotoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(photos: List<DBPhoto>)
 
-    @Query("SELECT * FROM photos WHERE searchedString = :queryString")
-    fun photos(queryString: String): PagingSource<Int, DBPhoto>
+    @Query("SELECT * FROM photos")
+    fun photos(): PagingSource<Int, DBPhoto>
 
     @Query("DELETE FROM photos")
     suspend fun clearPhotos()
