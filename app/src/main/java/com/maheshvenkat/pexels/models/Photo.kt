@@ -1,7 +1,9 @@
 package com.maheshvenkat.pexels.models
 
-import com.maheshvenkat.pexels.ui.photographer.PhotographerInfo
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Photo(
     val id: Long,
     val originalUrl: String,
@@ -9,11 +11,4 @@ data class Photo(
     val portraitUrl: String,
     val photographerName: String,
     val photographerUrl: String,
-)
-
-fun Photo.getPhotographerInfo(): PhotographerInfo {
-    return PhotographerInfo(
-        name = this.photographerName,
-        websiteInfo = this.photographerUrl
-    )
-}
+) : Parcelable

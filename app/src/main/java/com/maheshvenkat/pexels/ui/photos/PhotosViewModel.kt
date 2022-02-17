@@ -7,7 +7,6 @@ import androidx.paging.map
 import com.maheshvenkat.pexels.data.PhotosRepository
 import com.maheshvenkat.pexels.db.asDomainModel
 import com.maheshvenkat.pexels.models.Photo
-import com.maheshvenkat.pexels.ui.photographer.PhotographerInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -37,8 +36,8 @@ class PhotosViewModel(
     /**
      * Helps us to set the Photographer info to the bottom sheet from Fragment
      */
-    private val _navigateToSelectedPhotographer = MutableLiveData<PhotographerInfo>()
-    val navigateToSelectedPhotographer: LiveData<PhotographerInfo>
+    private val _navigateToSelectedPhotographer = MutableLiveData<PhotoInfo>()
+    val navigateToSelectedPhoto: LiveData<PhotoInfo>
         get() = _navigateToSelectedPhotographer
 
     init {
@@ -97,8 +96,8 @@ class PhotosViewModel(
         repository.getSearchResultStream(queryString)
             .map { pagingData -> pagingData.map { dbPhoto -> dbPhoto.asDomainModel() } }
 
-    fun displayPhotographerDetails(photographerInfo: PhotographerInfo) {
-        _navigateToSelectedPhotographer.value = photographerInfo
+    fun displayPhotographerDetails(photoInfo: PhotoInfo) {
+        _navigateToSelectedPhotographer.value = photoInfo
     }
 
     fun displayPhotographerDetailsComplete() {

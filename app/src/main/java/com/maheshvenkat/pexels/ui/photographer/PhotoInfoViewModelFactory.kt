@@ -18,17 +18,18 @@ package com.maheshvenkat.pexels.ui.photographer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.maheshvenkat.pexels.models.Photo
 
 /**
  * Simple ViewModel factory that provides the PhotographerInfo to the ViewModel.
  */
-class PhotographerInfoViewModelFactory(
-    private val photographerInfo: PhotographerInfo
+class PhotoInfoViewModelFactory(
+    private val photo: Photo
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PhotographerInfoViewModel::class.java)) {
-            return PhotographerInfoViewModel(photographerInfo) as T
+        if (modelClass.isAssignableFrom(PhotoInfoViewModel::class.java)) {
+            return PhotoInfoViewModel(photo) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

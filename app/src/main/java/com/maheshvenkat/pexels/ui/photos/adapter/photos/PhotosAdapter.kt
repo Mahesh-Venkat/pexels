@@ -4,8 +4,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.maheshvenkat.pexels.models.Photo
-import com.maheshvenkat.pexels.models.getPhotographerInfo
-import com.maheshvenkat.pexels.ui.photographer.PhotographerInfo
 
 /**
  * Adapter for the list of Photos
@@ -23,7 +21,7 @@ class PhotosAdapter(val onClickListener: OnClickListener) :
             holder.bind(photoItem)
 
             holder.itemView.setOnClickListener {
-                onClickListener.onClick(photoItem.getPhotographerInfo())
+                onClickListener.onClick(photoItem)
             }
         }
     }
@@ -38,7 +36,7 @@ class PhotosAdapter(val onClickListener: OnClickListener) :
         }
     }
 
-    class OnClickListener(val clickListener: (photographerInfo: PhotographerInfo) -> Unit) {
-        fun onClick(photographerInfo: PhotographerInfo) = clickListener(photographerInfo)
+    class OnClickListener(val clickListener: (photo: Photo) -> Unit) {
+        fun onClick(photo: Photo) = clickListener(photo)
     }
 }

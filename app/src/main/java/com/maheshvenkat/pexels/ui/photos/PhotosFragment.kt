@@ -57,7 +57,7 @@ class PhotosFragment : Fragment() {
         )
 
         // Navigate to Bottom sheet on click of the Photo from the adapter
-        viewModel.navigateToSelectedPhotographer.observe(
+        viewModel.navigateToSelectedPhoto.observe(
             viewLifecycleOwner
         ) {
             if (null != it) {
