@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.maheshvenkat.pexels.ui.utils.TouchImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
             android:layout_height="@dimen/image_height"
@@ -24,6 +24,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:imageUrl="@{viewModel.selectedPhoto.originalUrl}"
             app:layout_constraintTop_toTopOf="parent"
+            android:clickable="true"
+            android:focusable="true"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
