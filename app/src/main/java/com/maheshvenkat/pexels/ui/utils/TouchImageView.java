@@ -1,7 +1,6 @@
 package com.maheshvenkat.pexels.ui.utils;
 /**
  * https://stackoverflow.com/a/54474455/2470900
- * <p>
  * Zain helped someone on Stackoverflow by writing this class for others, which was helpful for me in this App
  */
 
