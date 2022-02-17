@@ -36,8 +36,8 @@ class PhotosViewModel(
     /**
      * Helps us to set the Photographer info to the bottom sheet from Fragment
      */
-    private val _navigateToSelectedPhotographer = MutableLiveData<PhotoInfo>()
-    val navigateToSelectedPhoto: LiveData<PhotoInfo>
+    private val _navigateToSelectedPhotographer = MutableLiveData<Photo>()
+    val navigateToSelectedPhoto: LiveData<Photo>
         get() = _navigateToSelectedPhotographer
 
     init {
@@ -96,7 +96,7 @@ class PhotosViewModel(
         repository.getSearchResultStream(queryString)
             .map { pagingData -> pagingData.map { dbPhoto -> dbPhoto.asDomainModel() } }
 
-    fun displayPhotographerDetails(photoInfo: PhotoInfo) {
+    fun displayPhotographerDetails(photoInfo: Photo) {
         _navigateToSelectedPhotographer.value = photoInfo
     }
 

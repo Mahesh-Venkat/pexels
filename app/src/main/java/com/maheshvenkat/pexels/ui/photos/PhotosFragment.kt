@@ -62,7 +62,7 @@ class PhotosFragment : Fragment() {
         ) {
             if (null != it) {
                 this.findNavController()
-                    .navigate(PhotosFragmentDirections.actionPhotosFragmentToBottomSheet(it))
+                    .navigate(PhotosFragmentDirections.actionPhotosFragmentToPhotoInfo(it))
                 viewModel.displayPhotographerDetailsComplete()
             }
         }
