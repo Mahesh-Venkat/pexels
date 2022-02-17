@@ -20,7 +20,6 @@ buildscript {
         def retrofit_version = '2.6.2'
         def truth_version = '1.0'
         def room_version = '2.4.1'
-        def work_version = '2.2.0'
         def glide_version = '4.13.0'
         def glide_compiler_version = '4.13.0'
         def timber_version = '4.7.1'
@@ -59,8 +58,6 @@ buildscript {
                 // Navigation
                 "androidx.navigation:navigation-fragment-ktx:$navigation_version",
                 "androidx.navigation:navigation-ui-ktx:$navigation_version",
-
-                "androidx.work:work-runtime-ktx:$work_version",
 
                 // Room for database
                 "androidx.room:room-ktx:$room_version",
@@ -124,7 +121,6 @@ buildscript {
 
                 //  Architecture Components testing libraries
                 "androidx.arch.core:core-testing:$lifecycle_version",
-                "androidx.work:work-testing:$work_version",
 
                 // Coroutines testing
                 "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_android_version",
