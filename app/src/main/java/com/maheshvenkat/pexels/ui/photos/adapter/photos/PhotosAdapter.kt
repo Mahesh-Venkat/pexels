@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.maheshvenkat.pexels.models.Photo
+import com.maheshvenkat.pexels.ui.photos.adapter.loadstate.LOAD_STATE_VIEW_TYPE
 
 /**
  * Adapter for the list of Photos
@@ -23,6 +24,14 @@ class PhotosAdapter(private val onClickListener: OnClickListener) :
             holder.itemView.setOnClickListener {
                 onClickListener.onClick(photoItem)
             }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == itemCount) {
+            PHOTO_VIEW_TYPE
+        } else {
+            LOAD_STATE_VIEW_TYPE
         }
     }
 
