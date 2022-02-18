@@ -8,7 +8,7 @@ import com.maheshvenkat.pexels.models.Photo
 /**
  * Adapter for the list of Photos
  */
-class PhotosAdapter(val onClickListener: OnClickListener) :
+class PhotosAdapter(private val onClickListener: OnClickListener) :
     PagingDataAdapter<Photo, PhotoViewHolder>(Photo_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {

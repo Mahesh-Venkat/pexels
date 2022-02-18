@@ -89,14 +89,6 @@ class PhotosViewModel(
         super.onCleared()
     }
 
-    /**
-     * Intentionally commented this code, as there is a bug with network -> Cache  and Cache -> Network
-     * I will be enabling the initial just Network fetch for now and leaving the database access in this file and everywhere
-     */
-//    private fun searchPhoto(queryString: String): Flow<PagingData<Photo>> =
-//        repository.getSearchResultStream(queryString)
-//            .map { pagingData -> pagingData.map { dbPhoto -> dbPhoto.asDomainModel() } }
-
     private fun searchPhoto(queryString: String): Flow<PagingData<Photo>> =
         repository.getSearchResultStream(queryString)
 
