@@ -1,3 +1,4 @@
+
 # Pexel Photo Search
 
 Android App, uses Pexels API to help user search for a Photo
@@ -33,3 +34,4 @@ Once you download the app. Run the app, you can search for a photo, get the deta
 ###### How to run the app
 
 The app is targeted to Android sdk 31. You will need Pexels API key to get this app up and running. You can get the api key from here https://www.pexels.com/api/. Once you get the api key, place it in your local.properties and you should be good to run the app on your Android studio
+
