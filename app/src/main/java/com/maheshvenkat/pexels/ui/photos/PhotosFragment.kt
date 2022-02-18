@@ -24,7 +24,6 @@ import com.maheshvenkat.pexels.ui.RemotePresentationState
 import com.maheshvenkat.pexels.ui.asRemotePresentationState
 import com.maheshvenkat.pexels.ui.photos.adapter.loadstate.PhotosLoadStateAdapter
 import com.maheshvenkat.pexels.ui.photos.adapter.photos.PhotosAdapter
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -82,13 +81,11 @@ class PhotosFragment : Fragment() {
         uiActions: (UiAction) -> Unit,
         photosAdapter: PhotosAdapter
     ) {
-
         val header = PhotosLoadStateAdapter { photosAdapter.retry() }
         list.adapter = photosAdapter.withLoadStateHeaderAndFooter(
             header = header,
             footer = PhotosLoadStateAdapter { photosAdapter.retry() }
         )
-
         bindSearch(
             uiState = uiState,
             onQueryChanged = uiActions
@@ -102,7 +99,6 @@ class PhotosFragment : Fragment() {
         )
     }
 
-    @OptIn(InternalCoroutinesApi::class)
     private fun FragmentPhotosBinding.bindSearch(
         uiState: StateFlow<UiState>,
         onQueryChanged: (UiAction.Search) -> Unit
@@ -148,11 +144,15 @@ class PhotosFragment : Fragment() {
         pagingData: Flow<PagingData<Photo>>,
         onScrollChanged: (UiAction.Scroll) -> Unit
     ) {
+
+        retryButton.setOnClickListener { photosAdapter.retry() }
+
         list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy != 0) onScrollChanged(UiAction.Scroll(currentQuery = uiState.value.query))
             }
         })
+
         val notLoading = photosAdapter.loadStateFlow
             .asRemotePresentationState()
             .map { it == RemotePresentationState.PRESENTED }
@@ -165,8 +165,7 @@ class PhotosFragment : Fragment() {
             notLoading,
             hasNotScrolledForCurrentSearch,
             Boolean::and
-        )
-            .distinctUntilChanged()
+        ).distinctUntilChanged()
 
         lifecycleScope.launch {
             pagingData.collectLatest(photosAdapter::submitData)
@@ -180,7 +179,6 @@ class PhotosFragment : Fragment() {
 
         lifecycleScope.launch {
             photosAdapter.loadStateFlow.collect { loadState ->
-
                 // Show a retry header if there was an error refreshing, and items were previously
                 // cached OR default to the default prepend state
                 header.loadState = loadState.mediator
@@ -192,30 +190,6 @@ class PhotosFragment : Fragment() {
                     loadState.refresh is LoadState.NotLoading && photosAdapter.itemCount == 0
                 // show empty list
                 emptyList.isVisible = isListEmpty
-                emptyList.text = getString(R.string.no_results)
-                // Only show the list if refresh succeeds.
-                list.isVisible = !isListEmpty
-            }
-        }
-
-        retryButton.setOnClickListener { photosAdapter.retry() }
-
-        lifecycleScope.launch {
-            photosAdapter.loadStateFlow.collect { loadState ->
-
-                // Show a retry header if there was an error refreshing, and items were previously
-                // cached OR default to the default prepend state
-                header.loadState = loadState.mediator
-                    ?.refresh
-                    ?.takeIf { it is LoadState.Error && photosAdapter.itemCount > 0 }
-                    ?: loadState.prepend
-
-                val isListEmpty =
-                    loadState.refresh is LoadState.NotLoading && photosAdapter.itemCount == 0
-                // show empty list
-                emptyList.isVisible = isListEmpty
-                emptyList.text = getString(R.string.no_results)
-
                 // Only show the list if refresh succeeds, either from the the local db or the remote.
                 list.isVisible =
                     loadState.source.refresh is LoadState.NotLoading || loadState.mediator?.refresh is LoadState.NotLoading
@@ -224,13 +198,6 @@ class PhotosFragment : Fragment() {
                 // Show the retry state if initial load or refresh fails.
                 retryButton.isVisible =
                     loadState.mediator?.refresh is LoadState.Error && photosAdapter.itemCount == 0
-
-                //Repurposing empty List text to show the error message
-                if (loadState.source.refresh is LoadState.Error) {
-                    emptyList.isVisible = loadState.source.refresh is LoadState.Error
-                    emptyList.text = getString(R.string.shared_label_oops_with_error_message)
-                }
-
                 // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error

@@ -11,12 +11,14 @@ import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
 const val PHOTOS_STARTING_PAGE_INDEX = 1
+const val NETWORK_PAGE_SIZE = 30
+
 
 class PhotosRepository(private val service: PexelsService, private val database: PhotosDatabase) {
 
     /**
      * Search Photos whose names match the query, exposed as a stream of data that will emit
-     * every time we get more data from the network.
+     * every time we get more data from the network and cache it for you in the database.
      */
     fun getSearchResultStream(query: String): Flow<PagingData<DBPhoto>> {
         Timber.d("Pexels, New query: $query")
@@ -36,9 +38,5 @@ class PhotosRepository(private val service: PexelsService, private val database:
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
-    }
-
-    companion object {
-        const val NETWORK_PAGE_SIZE = 30
     }
 }

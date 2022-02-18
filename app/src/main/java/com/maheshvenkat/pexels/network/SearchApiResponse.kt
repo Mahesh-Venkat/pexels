@@ -49,6 +49,7 @@ fun List<PexelPhoto>.asDomainModel(): List<Photo> {
             id = it.id,
             originalUrl = it.photoInfo.original,
             smallUrl = it.photoInfo.small,
+            tinyUrl = it.photoInfo.tiny,
             portraitUrl = it.photoInfo.portrait,
             photographerName = it.photographer,
             photographerUrl = it.photographerUrl
@@ -62,6 +63,7 @@ fun List<PexelPhoto>.asDatabaseModel(queryString: String): List<DBPhoto> {
             id = it.id,
             originalUrl = it.photoInfo.original,
             smallUrl = it.photoInfo.small,
+            tinyUrl = it.photoInfo.tiny,
             portraitUrl = it.photoInfo.portrait,
             photographer = it.photographer,
             photographerUrl = it.photographerUrl,

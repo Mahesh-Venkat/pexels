@@ -15,6 +15,7 @@ data class DBPhoto(
     val photographer: String,
     val photographerUrl: String,
     val smallUrl: String,
+    val tinyUrl: String,
     val portraitUrl: String,
     val searchedString: String = "",
 )
@@ -25,6 +26,7 @@ fun List<DBPhoto>.asDomainModel(): List<Photo> {
             id = it.id,
             originalUrl = it.originalUrl,
             smallUrl = it.smallUrl,
+            tinyUrl = it.tinyUrl,
             portraitUrl = it.portraitUrl,
             photographerName = it.photographer,
             photographerUrl = it.photographerUrl
@@ -38,6 +40,7 @@ fun DBPhoto.asDomainModel(): Photo {
         id = this.id,
         originalUrl = this.originalUrl,
         smallUrl = this.smallUrl,
+        tinyUrl = this.tinyUrl,
         portraitUrl = this.portraitUrl,
         photographerName = this.photographer,
         photographerUrl = this.photographerUrl

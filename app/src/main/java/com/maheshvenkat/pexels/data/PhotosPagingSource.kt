@@ -2,7 +2,6 @@ package com.maheshvenkat.pexels.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.maheshvenkat.pexels.data.PhotosRepository.Companion.NETWORK_PAGE_SIZE
 import com.maheshvenkat.pexels.models.Photo
 import com.maheshvenkat.pexels.network.PexelsService
 import com.maheshvenkat.pexels.network.asDomainModel

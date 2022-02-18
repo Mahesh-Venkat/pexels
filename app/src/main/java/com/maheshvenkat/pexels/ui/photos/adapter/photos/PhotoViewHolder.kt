@@ -47,9 +47,9 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             getSystemService(imageView.context, ConnectivityManager::class.java)
         val imgUri =
             if (connectivityManager?.isActiveNetworkMetered == true) {
-                photo.smallUrl.toUri().buildUpon().scheme("https").build()
+                photo.tinyUrl.toUri().buildUpon().scheme("https").build()
             } else {
-                photo.originalUrl.toUri().buildUpon().scheme("https").build()
+                photo.smallUrl.toUri().buildUpon().scheme("https").build()
             }
 
         return imgUri

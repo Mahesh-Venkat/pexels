@@ -8,6 +8,7 @@ data class Photo(
     val id: Long,
     val originalUrl: String,
     val smallUrl: String,
+    val tinyUrl: String,
     val portraitUrl: String,
     val photographerName: String,
     val photographerUrl: String,
