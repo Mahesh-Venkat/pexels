@@ -3,9 +3,7 @@ package com.maheshvenkat.pexels.ui.photos
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
 import com.maheshvenkat.pexels.data.PhotosRepository
-import com.maheshvenkat.pexels.db.asDomainModel
 import com.maheshvenkat.pexels.models.Photo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -91,10 +89,16 @@ class PhotosViewModel(
         super.onCleared()
     }
 
+    /**
+     * Intentionally commented this code, as there is a bug with network -> Cache  and Cache -> Network
+     * I will be enabling the initial just Network fetch for now and leaving the database access in this file and everywhere
+     */
+//    private fun searchPhoto(queryString: String): Flow<PagingData<Photo>> =
+//        repository.getSearchResultStream(queryString)
+//            .map { pagingData -> pagingData.map { dbPhoto -> dbPhoto.asDomainModel() } }
 
     private fun searchPhoto(queryString: String): Flow<PagingData<Photo>> =
         repository.getSearchResultStream(queryString)
-            .map { pagingData -> pagingData.map { dbPhoto -> dbPhoto.asDomainModel() } }
 
     fun displayPhotographerDetails(photoInfo: Photo) {
         _navigateToSelectedPhotographer.value = photoInfo
