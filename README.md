@@ -8,8 +8,6 @@ Once you download the app. Run the app, you can search for a photo, get the deta
 
 
 ###### Features
-
-- It caches the paged data in-memory for better usage of the system resources which not only gives fast response but also helps in data loading without hiccups.
 - It handles the network request duplication very elegantly hence saving the user's bandwidth and system resources.
 - It has inbuilt support for error handling, retry and refresh use cases.
 
@@ -20,7 +18,6 @@ Once you download the app. Run the app, you can search for a photo, get the deta
 - Glide to load images in Recycler Grid Layout Manager
 - Navigation lib for page navigation
 - Built a TouchImageView with the help of this https://stackoverflow.com/a/54474455/2470900, Thanks to Zain
-- Room DB for caching data
 - Flow and livedata types  for Data exchange on different layers
 - ViewBinding and DatingBinding
 - SavedStateHandle to store the content of the searched text
