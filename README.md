@@ -8,13 +8,13 @@ Once you download the app. Run the app, you can search for a photo, get the deta
 
 
 ###### Features
-
 - It caches the paged data in-memory for better usage of the system resources which not only gives fast response but also helps in data loading without hiccups.
 - It handles the network request duplication very elegantly hence saving the user's bandwidth and system resources.
 - It has inbuilt support for error handling, retry and refresh use cases.
 
 ###### Android Tech Stack
 
+- Using MVVM architecture
 - This app follows  one activity, multi fragment pattern
 - Paging 3 for Pagination
 - Glide to load images in Recycler Grid Layout Manager
@@ -24,6 +24,15 @@ Once you download the app. Run the app, you can search for a photo, get the deta
 - Flow and livedata types  for Data exchange on different layers
 - ViewBinding and DatingBinding
 - SavedStateHandle to store the content of the searched text
+
+###### Packaging
+
+- data package has the repository, mediator and pagingSource ( which is not used in this flow)
+- db package has all the Room related classes
+- models package has the data class objects that are interacting with UI
+- network package has the data class objects and network layer interaction
+- ui package has the rest of the classes that helps you to draw UI for the user with sub packages in it
+
 
 
 ###### How to run the app
