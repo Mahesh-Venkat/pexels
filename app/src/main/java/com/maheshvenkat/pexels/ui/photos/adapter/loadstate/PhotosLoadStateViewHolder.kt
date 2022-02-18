@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maheshvenkat.pexels.R
 import com.maheshvenkat.pexels.databinding.PhotosLoadStateFooterViewItemBinding
 
-
+const val LOAD_STATE_VIEW_TYPE = 1
 class PhotosLoadStateViewHolder(
     private val binding: PhotosLoadStateFooterViewItemBinding,
     tryAgain: () -> Unit

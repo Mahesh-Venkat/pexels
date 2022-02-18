@@ -17,6 +17,7 @@ import com.maheshvenkat.pexels.models.Photo
 /**
  * View Holder for a Photo RecyclerView list item.
  */
+const val PHOTO_VIEW_TYPE = 2
 class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val imageView: ImageView = view.findViewById(R.id.photoImage)
     private var photo: Photo? = null
