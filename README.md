@@ -27,11 +27,11 @@ Once you download the app. Run the app, you can search for a photo, get the deta
 
 ###### Packaging
 
-- data package has the repository, mediator and pagingSource ( which is not used in this flow)
-- db package has all the Room related classes
-- models package has the data class objects that are interacting with UI
-- network package has the data class objects and network layer interaction
-- ui package has the rest of the classes that helps you to draw UI for the user with sub packages in it
+- *data* package has the repository, mediator and pagingSource ( which is not used in this flow)
+- *db* package has all the Room related classes
+- *models* package has the data class objects that are interacting with UI
+- *network* package has the data class objects and network layer interaction
+- *ui* package has the rest of the classes that helps you to draw UI for the user with sub packages in it
 
 
 
