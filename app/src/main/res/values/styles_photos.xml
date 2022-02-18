@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PhotosRecyclerView">
+        <item name="android:clipToPadding">false</item>
+        <item name="android:padding">6dp</item>
+        <item name="spanCount">3</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="layoutManager">androidx.recyclerview.widget.GridLayoutManager</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_margin">@dimen/grid_1x</item>
+    </style>
+
+    <style name="EditTextStyle" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">textNoSuggestions</item>
+        <item name="android:selectAllOnFocus">true</item>
+    </style>
+
+    <style name="EmptyListText" parent="@style/TextAppearance.AppCompat.Large">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">@dimen/grid_2x</item>
+
+    </style>
+
+    <style name="PhotoItem">
+        <item name="android:padding">@dimen/grid_halfx</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
+    <style name="PhotoLoadStateFooterErrorMessage" parent="@style/TextAppearance.AppCompat.Body1">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="PhotoLoadStateFooterButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">?android:colorPrimaryDark</item>
+    </style>
+
+</resources>

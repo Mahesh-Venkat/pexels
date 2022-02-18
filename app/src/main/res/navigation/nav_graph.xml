@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/photosFragment">
+
+    <fragment
+        android:id="@+id/photosFragment"
+        android:name="com.maheshvenkat.pexels.ui.photos.PhotosFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_photos">
+        <action
+            android:id="@+id/action_photosFragment_to_photoInfo"
+            app:destination="@id/photoInfo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photoInfo"
+        android:name="com.maheshvenkat.pexels.ui.photoinfo.PhotoInfoFragment"
+        android:label="Photo"
+        tools:layout="@layout/fragment_photo_info">
+        <argument
+            android:name="selectedPhoto"
+            app:argType="com.maheshvenkat.pexels.models.Photo" />
+    </fragment>
+</navigation>
