@@ -13,6 +13,7 @@ Once you download the app. Run the app, you can search for a photo, get the deta
 
 ###### Android Tech Stack
 
+- Using MVVM architecture
 - This app follows  one activity, multi fragment pattern
 - Paging 3 for Pagination
 - Glide to load images in Recycler Grid Layout Manager
@@ -22,6 +23,12 @@ Once you download the app. Run the app, you can search for a photo, get the deta
 - ViewBinding and DatingBinding
 - SavedStateHandle to store the content of the searched text
 
+###### Packaging
+
+- *data* package has the repository and pagingSource
+- *models* package has the data class objects that are interacting with UI
+- *network* package has the data class objects and network layer interaction
+- *ui* package has the rest of the classes that helps you to draw UI for the user with sub packages in it
 
 ###### How to run the app
 
