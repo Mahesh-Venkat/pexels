@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <com.maheshvenkat.pexels.ui.utils.TouchImageView
             android:id="@+id/imageView"
@@ -62,7 +62,7 @@
             android:id="@+id/websiteLabel"
             style="@style/Title"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginBottom="@dimen/grid_4x"
             android:text="@string/shared_label_website_info"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -14,16 +14,21 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maheshvenkat.pexels.Injection
 import com.maheshvenkat.pexels.MainActivity
 import com.maheshvenkat.pexels.R
 import com.maheshvenkat.pexels.databinding.FragmentPhotosBinding
 import com.maheshvenkat.pexels.models.Photo
+import com.maheshvenkat.pexels.ui.photos.adapter.loadstate.LOAD_STATE_VIEW_TYPE
 import com.maheshvenkat.pexels.ui.photos.adapter.loadstate.PhotosLoadStateAdapter
 import com.maheshvenkat.pexels.ui.photos.adapter.photos.PhotosAdapter
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+
+const val PHOTO_GRID_SPAN_COUNT = 3
+const val LOADING_STATE_GRID_SPAN_COUNT = 1
 
 class PhotosFragment : Fragment() {
 
@@ -78,11 +83,9 @@ class PhotosFragment : Fragment() {
         uiActions: (UiAction) -> Unit,
         photosAdapter: PhotosAdapter
     ) {
-        val header = PhotosLoadStateAdapter { photosAdapter.retry() }
-        list.adapter = photosAdapter.withLoadStateHeaderAndFooter(
-            header = header,
-            footer = PhotosLoadStateAdapter { photosAdapter.retry() }
-        )
+
+        tweakListWithDifferentSpansBasedOnTheViewTypes(photosAdapter = photosAdapter)
+
         bindSearch(
             uiState = uiState,
             onQueryChanged = uiActions
@@ -92,6 +95,27 @@ class PhotosFragment : Fragment() {
             uiState = uiState,
             pagingData = pagingData,
             onScrollChanged = uiActions
+        )
+    }
+
+    private fun FragmentPhotosBinding.tweakListWithDifferentSpansBasedOnTheViewTypes(photosAdapter: PhotosAdapter) {
+        val gridLayoutManager = GridLayoutManager(activity, PHOTO_GRID_SPAN_COUNT)
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                val viewType = photosAdapter.getItemViewType(position)
+                return if (viewType == LOAD_STATE_VIEW_TYPE) LOADING_STATE_GRID_SPAN_COUNT
+                else PHOTO_GRID_SPAN_COUNT
+            }
+        }
+
+        list.apply {
+            this.layoutManager = gridLayoutManager
+            this.setHasFixedSize(true)
+        }
+        val header = PhotosLoadStateAdapter { photosAdapter.retry() }
+        list.adapter = photosAdapter.withLoadStateHeaderAndFooter(
+            header = header,
+            footer = PhotosLoadStateAdapter { photosAdapter.retry() }
         )
     }
 
